@@ -1,0 +1,100 @@
+/*elements*/
+body{
+    background-color: #1c1427;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+button, button:active, button:focus {
+    height: 75px;
+    border: none;
+    background-color: rgba(126, 202, 156, 1);
+    color: rgba(64, 57, 74, 1);
+    outline: 0;
+}
+button.clicked {
+    height: 75px;
+    border: none;
+    background-color: rgba(126, 202, 156, .5);
+    color: rgba(28, 20, 39, 1);
+    outline: 0;
+}
+
+article {
+    display: inline;
+    background-color: rgba(204, 255, 189, 1);
+    box-sizing: border-box;
+    padding: 25px 15px 35px;
+    border-radius: 5;
+}
+
+
+/*display section*/
+
+#calc_display {
+    height: 100px;
+    max-width: 100%;
+    margin: 6px;
+    background-color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 25px;
+}
+
+p#display_value {
+    display: inline;
+    font-size: 28px;
+}
+
+
+
+/*calculator section */
+#calc_btns {
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+}
+
+#btns_numbers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 6px;
+}
+
+#btns_functions {
+    display: flex;
+    flex-direction: column;
+}
+
+#btns_functions > button.btn{
+    margin: 3px 6px;
+}
+
+.btn_nbr , .btn {
+    font-size: 26px;
+    width: 75px;
+}
+
+#calc_controls {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr;
+    grid-gap: 6px;
+    width: 329px;
+    margin-bottom: 3px;
+}
+
+#controls_delete {
+    margin-left: 6px;
+}
+
+#controls_delete , #controls_clear {
+    font-size: 26px;
+}
+
+
