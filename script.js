@@ -6,6 +6,9 @@ let total;
 let display = document.getElementById(`display_value`);
 
 
+
+// for loop cu i, daca i <= 1 continue, daca i > 1 error
+
 //constants
 const addButtonClass = document.querySelectorAll("button");
 const divideOperator = document.getElementById(`divide`);
@@ -18,12 +21,33 @@ const equalsBtn = document.getElementById(`controls_equals`);
 const acBtn = document.getElementById(`controls_clear`);
 const cBtn = document.getElementById(`controls_delete`);
 
+// daca este firstval, secondval si operator call la functia operate
+// pe butoanele de la operatii
+divideOperator.addEventListener(`click`, () => {
+    if (firstVal && secondVal && operator) {
+        operate();
+        secondVal = ``;
+    } else operator = `/`;
 
-// event listeners
-divideOperator.addEventListener(`click`, () => operator = `/`)
-multiplyOperator.addEventListener(`click`, () => operator = `*`)
-addOperator.addEventListener(`click`, () => operator = `+`)
-subtractOperator.addEventListener(`click`, () => operator = `-`)
+});
+multiplyOperator.addEventListener(`click`, () => {
+    if (firstVal && secondVal && operator) {
+        operate();
+        secondVal = ``;
+    } else operator = `*`;
+});
+addOperator.addEventListener(`click`, () => {
+    if (firstVal && secondVal && operator) {
+        operate();
+        secondVal = ``;
+    } else operator = `+`;
+});
+subtractOperator.addEventListener(`click`, () =>  {
+    if (firstVal && secondVal && operator) {
+        operate();
+        secondVal = ``;
+    } else operator = `-`;
+});
 
 equalsBtn.addEventListener(`click`, () => {
     if (firstVal && secondVal) {
@@ -58,7 +82,7 @@ cBtn.addEventListener(`click`, () => {
 
 const updateFirstOperandValue = numberButtons.map(btn => {
     btn.addEventListener(`click`, () => {
-        lengthCheck()
+        lengthCheck();
         if (operator) return;
         firstVal += String(btn.textContent);
         return (display.textContent = firstVal);
@@ -66,21 +90,21 @@ const updateFirstOperandValue = numberButtons.map(btn => {
 })
 const updateSecondOperandValue = numberButtons.map(btn => {
     btn.addEventListener(`click`, () => {
-        lengthCheck()
+        lengthCheck();
         if (!firstVal && !operator) return;
         if (firstVal && operator) {
             secondVal += String(btn.textContent);
             return (display.textContent = secondVal);
         }
-
     })
+
 })
 
 for (const button of addButtonClass) {
-  button.addEventListener('click', () => {
-    button.classList.add(`clicked`);
-    setTimeout(() => button.classList.remove(`clicked`), 100)
-  })
+    button.addEventListener('click', () => {
+        button.classList.add(`clicked`);
+        setTimeout(() => button.classList.remove(`clicked`), 100)
+    })
 }
 
 //functions
@@ -93,22 +117,30 @@ function subtract(a, b) {
 }
 
 function multiply(a, b) {
-    return (a * b).toFixed(1);
+    return +(a * b).toFixed(1);
 }
 
 function divide(a, b) {
-    return (a / b).toFixed(1);
+    return +(a / b).toFixed(1);
 }
 
 function operate(a, b) {
     a = Number(firstVal);
     b = Number(secondVal);
     if (operator === `/`) {
-        display.textContent = divide(a, b);
+        if (firstVal == `0` || secondVal == `0`) {
+            display.textContent = `Error`;
+        } else if (firstVal !== `0` || secondVal !== `0`) {
+            display.textContent = divide(a, b);
+        }
         firstVal = display.textContent;
     } else if (operator === `*`) {
-        display.textContent = multiply(a, b);
-        firstVal = display.textContent;
+        if (firstVal == `0` || secondVal == `0`) {
+            display.textContent = `Error`;
+        } else if (firstVal !== `0` || secondVal !== `0`) {
+            display.textContent = multiply(a, b);
+            firstVal = display.textContent;
+        }
     } else if (operator === `+`) {
         display.textContent = add(a, b);
         firstVal = display.textContent;
@@ -127,5 +159,3 @@ function lengthCheck() {
         secondVal = secondVal.substring(0, 17);
     }
 }
-
-
